@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+message Query {
+  string id = 1;
+  string userId = 2;
+  string hospital = 3;
+  string doctor = 4;
+  string data = 5;
+}
+
+message GetQueryByIdRequest {
+  string id = 1;
+}
+
+message QueryRequest {
+  Query query = 1;
+}
+
+
+message ListQueryRequest {
+  string userId = 1;
+}
+
+message ListQueryResponse {
+  repeated Query query = 1;
+}
+
+
+message QueryResponse {
+  Query query = 1;
+}
+
+message Hospital{
+    string nome = 1;
+    string local = 2;
+    string cep = 3;
+}
+
+message GetHospital{
+    string cep = 1;
+}
+
+message HospitalResponse{
+    repeated Hospital hospital = 1;
+    string error = 2;
+}
+
+service SusService {
+  rpc getQueryById(GetQueryByIdRequest) returns (QueryResponse);
+  rpc listQuerys(ListQueryRequest) returns (ListQueryResponse);
+  rpc Query(QueryRequest) returns (QueryResponse);
+  rpc getHospital(GetHospital) returns (HospitalResponse);
+}

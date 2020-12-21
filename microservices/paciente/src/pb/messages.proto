@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+message Patient {
+  string id = 1;
+  string email = 2;
+  string username = 3;
+  string password = 4;
+}
+
+message GetPatientByIdRequest {
+  string id = 1;
+}
+message RegisterPatientRequest {
+  Patient patient = 1;
+}
+message LoginPatientRequest {
+  Patient patient = 1;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
+message PatientResponse {
+  Patient patient = 1;
+  string error = 2;
+}
+
+message AuthenticationRequest {
+  string token = 1;
+}
+
+service PatientService {
+  rpc getPatientById(GetPatientByIdRequest) returns (PatientResponse);
+  rpc registerPatient(RegisterPatientRequest) returns (PatientResponse);
+  rpc loginPatient(LoginPatientRequest) returns (LoginResponse);
+  rpc authenticate(AuthenticationRequest) returns (PatientResponse);
+}
