@@ -12,6 +12,7 @@
     "electron": "^11.1.0"
   },
   "dependencies": {
+    "electron-reload": "^1.5.0",
     "grpc": "^1.24.4",
     "jquery": "^3.5.1"
   }
