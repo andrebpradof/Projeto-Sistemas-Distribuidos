@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/js/bootstrap.min.js" />
+    <script>window.$ = window.jQuery = require('jquery');</script>
+</head>
+
+<body>
+    <div style="height: 800; width: 1000;">
+        <div class="container">
+            <!-- Content here -->
+            <div class="row text-center mt-2">
+                <div class="col">
+                    <h2>Scheduling Medical Appointments</h2>
+                </div>
+            </div>
+            <form>
+                <div class="form-row mt-5">
+                    <div class="form-group col-md-6">
+                        <h5>Enter with your zip code:</h5>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+                </div>
+            </form>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
+                </div>
+            </div>
+            <hr>
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="overflow-auto">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Doctor</label>
+                        <input type="text" class="form-control" id="doctor" placeholder="Doctor">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Date</label>
+                        <input type="datetime-local" class="form-control" id="date" placeholder="Date">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./app.js"></script>
+</body>
+
+</html>
