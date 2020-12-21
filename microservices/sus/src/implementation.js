@@ -1,3 +1,4 @@
+require('dotenv/config');
 const Sus = require('./models/Sus');
 const axios = require('axios');
 
@@ -28,14 +29,12 @@ module.exports = {
     async getHospital(call, callback){
         const { cep } = call.request;
         var hospital = [];
-        var KEY_GOOGLE = '';
-
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json?address='+cep+'&key='+KEY_GOOGLE)
+        axios.get('https://maps.googleapis.com/maps/api/geocode/json?address='+cep+'&key='+process.env.KEY_GOOGLE)
         .then(response => {
             if(response.data.status !== 'ZERO_RESULTS'){
                 var {lat, lng} = response.data.results[0].geometry.location;
                 
-                axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat.toString()+','+lng.toString()+'&radius=10000&type=hospital&key='+KEY_GOOGLE)
+                axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+lat.toString()+','+lng.toString()+'&radius=10000&type=hospital&key='+process.env.KEY_GOOGLE)
                 .then(response => {
                    
                     if(response.data.status === 'OK'){
