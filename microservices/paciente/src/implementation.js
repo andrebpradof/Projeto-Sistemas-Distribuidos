@@ -26,7 +26,6 @@ module.exports = {
   },
   async loginPatient(call, callback) {
     const { email, password } = call.request.patient;
-
     const patient = await Patient.findOne({ email });
 
     if (!patient) {
@@ -45,7 +44,6 @@ module.exports = {
   },
   async authenticate(call, callback) {
     const { token: fullToken } = call.request;
-    console.log(fullToken);
 
     if (!fullToken) {
       callback(null, { error: 'No token provided' });

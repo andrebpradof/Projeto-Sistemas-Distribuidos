@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/js/bootstrap.min.js" />
+    <!-- JavaScript Bundle with Popper -->
+    <script src="./media/js/bootstrap.bundle.min.js"></script>  
     <script>window.$ = window.jQuery = require('jquery');</script>
+    <style>
+    .ativo-line{
+        background-color: #ffc0c0 !important;
+        font-weight: 700 !important;
+    }
+    </style>
+    <title>Scheduling Medical Appointments</title>
 </head>
 
 <body>
+
     <div style="height: 800; width: 1000;">
         <div class="container">
             <!-- Content here -->
@@ -18,51 +27,52 @@
                     <h2>Scheduling Medical Appointments</h2>
                 </div>
             </div>
-            <form>
+            <div class="row mt-5">
+                <div class="col">
+                    <!-- Modal grande -->
+                    <button type="button" id="schedules" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Consult schedules</button>
+                    <br>
+
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="row text-center mt-5">
+                <div class="col">
+                    <h2>New Medical Appointment</h2>
+                </div>
+            </div>
+            <form id="forms-zip-code" action='#'>
                 <div class="form-row mt-5">
                     <div class="form-group col-md-6">
                         <h5>Enter with your zip code:</h5>
                     </div>
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="inputZip">
+                    <div class="form-group col-md-12">
+                        <input type="text" value='' required class="form-control" id="cep">
+                    </div>
+                </div>
+            
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
                     </div>
                 </div>
             </form>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Search</button>
-                </div>
-            </div>
             <hr>
-            <div class="row mt-3">
+            <div class="row mt-3 mb-5">
                 <div class="col">
                     <div class="overflow-auto">
-                        <table class="table table-hover">
+                        <table id='table-hospital' class="table table-hover">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Local</th>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
+                                <tr class="line-search">
+                                    <td colspan='3'>Search hospitals by zip code</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -70,39 +80,59 @@
                 </div>
             </div>
             <hr>
-            <form>
-                <div class="form-row">
+            <form id="forms-add-query">
+                <div class="form-row mb-5">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Doctor</label>
-                        <input type="text" class="form-control" id="doctor" placeholder="Doctor">
+                        <input type="text" required class="form-control" id="doctor" placeholder="Doctor">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Date</label>
-                        <input type="datetime-local" class="form-control" id="date" placeholder="Date">
+                        <input type="datetime-local" required class="form-control" id="date" placeholder="Date">
                     </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                
             </form>
-            <div class="row mt-2">
-                <div class="col">
-                    <!-- Modal grande -->
-                    <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal"
-                        data-target=".bd-example-modal-lg">Modal grande</button>
+    
+        </div>
+    </div>
 
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                ...
-                            </div>
-                        </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Doctor's appointments</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row mt-3 mb-5">
+                <div class="col">
+                    <div class="overflow-auto">
+                        <table id='table-query' class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Doctor</th>
+                                    <th scope="col">Local</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="line-search">
+                                    <td colspan='3'>Searching...</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
-
-
+    </div>
 
     <!-- You can also require other files to run in this process -->
     <script src="./app.js"></script>

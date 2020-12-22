@@ -27,7 +27,6 @@ class PurchaseController {
 
     async hospital(req, res) {
         const { cep } = req.params;
-        console.log(cep);
         const response = await SusService.getHospital({ cep });
     
         return res.json(response);
